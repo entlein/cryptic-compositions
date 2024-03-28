@@ -1,0 +1,13 @@
+version: '2'
+services:
+  # This backend service exposes some cryptic stuff on port 8000 at the / route
+  backend:
+    image: entlein/ctf-api:0.0.1  #this one needs to expose port 8000
+
+  
+  # This services decrypts the stuff if you point it to the right remote_url where the encrypted string is 
+  # It will then decrypt it if you visit port 8001 on route /decrypt
+  resolver:
+    image: entlein/ctf-resolver:0.0.2   
+    environment:
+      - CTF_REMOTEURL  #this env variable needs to point to the other container
